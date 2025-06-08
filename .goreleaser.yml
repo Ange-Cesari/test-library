@@ -4,33 +4,7 @@ before:
   hooks:
     - go mod tidy
 
-builds:
-  - env:
-      - CGO_ENABLED=0
-    goos:
-      - linux
-      - windows
-      - darwin
-    goarch:
-      - amd64
-      - arm64
-    # Configuration for a distributed library
-    mod_timestamp: '{{ .CommitTimestamp }}'
-    flags:
-      - -trimpath
-    ldflags:
-      - -s -w
-
-archives:
-  - format: tar.gz
-    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
-    format_overrides:
-      - goos: windows
-        format: zip
-    files:
-      - README.md
-      - LICENSE
-      - docs/*
+# Pour une bibliothèque, nous ne construisons pas de binaires
 
 changelog:
   sort: asc
@@ -41,17 +15,8 @@ changelog:
       - Merge pull request
       - Merge branch
 
-checksum:
-  name_template: 'checksums.txt'
-
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
-
-sboms:
-  - id: "{{ .ProjectName }}-sbom"
-    artifacts: binary
-    documents:
-      - "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}_sbom.spdx.json"
 
 # Configuration spécifique pour les bibliothèques distribuées
 gomod:
