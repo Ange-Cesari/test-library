@@ -26,3 +26,12 @@ func (c *Client) Hello(name string) string {
 func ExampleFunction(input string) string {
 	return "Example output for: " + input
 }
+
+// CalculateSum adds all the integers in a slice and returns the total
+func CalculateSum(numbers []int) int {
+	total := 0
+	for _, num := range numbers {
+		total += num
+	}
+	return total
+}
