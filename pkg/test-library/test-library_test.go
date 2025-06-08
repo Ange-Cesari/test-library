@@ -1,4 +1,4 @@
-package testlibrary-library
+package testlibrary
 
 import (
 	"testing"

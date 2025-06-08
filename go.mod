@@ -1,3 +1,3 @@
-module github.com/Caezarr-OSS/test-library
+module github.com/Ange-Cesari/test-library
 
-go 1.24.3
+go 1.21
