@@ -10,7 +10,7 @@ vars:
     sh: date -u '+%Y-%m-%d_%H:%M:%S'
   BUILD_DIR: dist
   BUILD_FLAGS: -ldflags "-s -w -X main.Version={{.VERSION}} -X main.CommitSHA={{.COMMIT}} -X main.BuildDate={{.DATE}}"
-  MAIN_PACKAGE: ./.
+  MAIN_PACKAGE: ./pkg/test-library
 
 tasks:
   build:
