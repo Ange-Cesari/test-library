@@ -1,0 +1,43 @@
+version: '3'
+
+vars:
+  BINARY_NAME: test-library
+  VERSION:
+    sh: git describe --tags --always --dirty
+  COMMIT:
+    sh: git rev-parse --short HEAD
+  DATE:
+    sh: date -u '+%Y-%m-%d_%H:%M:%S'
+  BUILD_DIR: dist
+  BUILD_FLAGS: -ldflags "-s -w -X main.Version={{.VERSION}} -X main.CommitSHA={{.COMMIT}} -X main.BuildDate={{.DATE}}"
+  MAIN_PACKAGE: ./.
+
+tasks:
+  build:
+    desc: Build for the current platform
+    cmds:
+      - mkdir -p {{.BUILD_DIR}}
+      - go build {{.BUILD_FLAGS}} -o {{.BUILD_DIR}}/{{.BINARY_NAME}} {{.MAIN_PACKAGE}}
+
+  test:
+    desc: Run tests
+    cmds:
+      - go test -v ./...
+
+  lint:
+    desc: Run linters
+    cmds:
+      - go vet ./...
+      - |
+        if ! command -v golangci-lint &> /dev/null; then
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+        fi
+      - golangci-lint run
+
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - rm -rf {{.BUILD_DIR}}
+      - mkdir -p {{.BUILD_DIR}}
+
+  
