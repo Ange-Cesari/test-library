@@ -3,9 +3,18 @@ package main
 import (
 	"fmt"
 
-	"github.com/test/test-library"
+	"github.com/Ange-Cesari/test-library/pkg/test-library"
 )
 
 func main() {
-	fmt.Println("Example usage of the library")
+	// Create a new client
+	client := testlibrary.NewClient()
+	
+	// Use the client to say hello
+	greeting := client.Hello("User")
+	fmt.Println(greeting)
+	
+	// Use a direct function from the library
+	result := testlibrary.ExampleFunction("test input")
+	fmt.Println(result)
 }
