@@ -3,7 +3,7 @@ name: Go Library Release
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - '[0-9]+.[0-9]+.[0-9]+'  # Format SemVer sans préfixe "v"
 
 jobs:
   release:
@@ -52,7 +52,7 @@ jobs:
             
             ## Installation
             ```
-            go get github.com/Ange-Cesari/test-library@${{ github.ref_name }}
+            go get github.com/Caezarr-OSS/test-library@${{ github.ref_name }}
             ```
           draft: false
           prerelease: false
