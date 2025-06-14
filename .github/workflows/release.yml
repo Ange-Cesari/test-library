@@ -53,7 +53,7 @@ jobs:
             
             ## Installation
             ```
-            go get {{ .Go.ModulePath }}@${{ "{{" }} github.ref_name {{ "}}" }}
+            go get github.com/Ange-Cesari/test-library@${{ "{{" }} github.ref_name {{ "}}" }}
             ```
           draft: false
           prerelease: false
