@@ -1,4 +1,4 @@
-project_name: {{ .ProjectName }}
+project_name: test-library
 
 before:
   hooks:
@@ -14,21 +14,17 @@ builds:
     goarch:
       - amd64
       - arm64
-    main: ./cmd/{{ .ProjectName }}
+    main: ./cmd/test-library
     ldflags:
       - -s -w
-      - -X main.Version={{`{{.Version}}`}}
-      - -X main.CommitSHA={{`{{.Commit}}`}}
-      - -X main.BuildDate={{`{{.Date}}`}}
-    binary: {{ .ProjectName }}
+      - -X main.Version={{ .Version }}
+      - -X main.CommitSHA={{ .Commit }}
+      - -X main.BuildDate={{ .Date }}
+    binary: test-library
 
 archives:
   - format: tar.gz
-    name_template: >-
-      {{`{{ .ProjectName }}_`}}
-      {{`{{ .Version }}_`}}
-      {{`{{ .Os }}_`}}
-      {{`{{ .Arch }}`}}
+    name_template: "test-library_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     format_overrides:
       - goos: windows
         format: zip
@@ -52,10 +48,10 @@ checksum:
   name_template: 'checksums.txt'
 
 snapshot:
-  name_template: "{{`{{ incpatch .Version }}`}}-next"
+  name_template: "{{ incpatch .Version }}-next"
 
 sboms:
-  - id: {{`{{ .ProjectName }}`}}-sbom
+  - id: test-library-sbom
     artifacts: binary
     documents:
-      - "{{`{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}_sbom.spdx.json`}}"
+      - "test-library_{{ .Version }}_{{ .Os }}_{{ .Arch }}_sbom.spdx.json"
