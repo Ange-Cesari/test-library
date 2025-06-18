@@ -7,6 +7,17 @@ on:
     branches: [ main, master, develop ]
 
 jobs:
+  commit-check:
+    name: Check Conventional Commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Validate Commit Messages
+        uses: wagoid/commitlint-github-action@v5
+
   build:
     runs-on: ubuntu-latest
     steps:

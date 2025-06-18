@@ -1,36 +1,27 @@
-# GoReleaser configuration
+# GoReleaser configuration for Go library
 version: 2
 
 before:
   hooks:
     - go mod tidy
 
-builds:
-  - env:
-      - CGO_ENABLED=0
-    main: ./examples
-    binary: example
-    goos:
-      - linux
-      - windows
-      - darwin
-    goarch:
-      - amd64
-      - arm64
-      - arm
-    ignore:
-      - goos: windows
-        goarch: arm
+# No builds section for libraries - they are distributed via go get
 
-archives:
-  - format: tar.gz
-    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
-    format_overrides:
-      - goos: windows
-        format: zip
-
-checksum:
-  name_template: checksums.txt
-
-sboms:
-  - artifacts: archive
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+      - '^chore:'
+  groups:
+    - title: 'Features'
+      regexp: '^.*?feat.*?:'
+      order: 0
+    - title: 'Bug fixes'
+      regexp: '^.*?fix.*?:'
+      order: 1
+    - title: 'Others'
+      order: 999

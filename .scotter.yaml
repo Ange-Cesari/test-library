@@ -1,4 +1,0 @@
-language: golang
-module: github.com/Ange-Cesari/test-library
-name: test-library
-type: library

@@ -1,15 +1,6 @@
 # test-library
 
-A simple Go library for testing, demonstrating library packaging with GoReleaser and Scotter.
-
-## Features
-
-- Go 1.21 compliant
-- Simple calculation, text formatting, and info functions
-- Semantic versioning with `v` prefix
-- Comprehensive test coverage
-- CI/CD pipelines with GitHub Actions
-- Release automation with GoReleaser
+A lightweight Go utility library providing common functions for demonstration purposes.
 
 ## Installation
 
@@ -24,30 +15,38 @@ package main
 
 import (
     "fmt"
-    
     "github.com/Ange-Cesari/test-library"
 )
 
 func main() {
-    // Print library information
-    fmt.Println(testlibrary.Info())
-    
-    // Use calculation functions
+    // Basic calculations
     sum := testlibrary.Calculate(5, 3)
     fmt.Printf("5 + 3 = %d\n", sum)
     
-    // Use greeting function
-    greeting := testlibrary.Greet("User")
+    product := testlibrary.Multiply(5, 3)
+    fmt.Printf("5 × 3 = %d\n", product)
+    
+    // Generate a greeting
+    greeting := testlibrary.Greet("Developer")
     fmt.Println(greeting)
+    
+    // Get system information
+    info := testlibrary.Info()
+    for key, value := range info {
+        fmt.Printf("%s: %s\n", key, value)
+    }
 }
 ```
 
-## Available Functions
+## Features
 
-- `Calculate(a, b int) int` - Adds two integers
-- `Multiply(a, b int) int` - Multiplies two integers
-- `Greet(name string) string` - Returns a greeting message
-- `Info() string` - Returns information about the library
+* Basic arithmetic functions
+* Greeting generator
+* System information utilities
+* Full test coverage
+* Semantic versioning
+* Continuous integration with GitHub Actions
+* Release automation with GoReleaser
 
 ## Development
 

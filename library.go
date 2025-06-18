@@ -1,32 +1,37 @@
-// Package testlibrary provides utility functions for the test library.
+// Package testlibrary provides utility functions for demonstration purposes.
 package testlibrary
 
 import (
 	"fmt"
+	"runtime"
+	"time"
 )
 
-// Version of the library
-const Version = "v0.1.0"
+// Version represents the current version of the library.
+const Version = "0.1.0"
 
-// Calculate adds two integers and returns the result
+// Calculate adds two integers and returns the result.
 func Calculate(a, b int) int {
 	return a + b
 }
 
-// Multiply multiplies two integers and returns the result
+// Multiply multiplies two integers and returns the result.
 func Multiply(a, b int) int {
 	return a * b
 }
 
-// Greet returns a greeting message
+// Greet returns a greeting message with the provided name.
 func Greet(name string) string {
-	if name == "" {
-		name = "World"
-	}
-	return fmt.Sprintf("Hello, %s!", name)
+	return fmt.Sprintf("Hello, %s! Welcome to test-library.", name)
 }
 
-// Info returns information about the library
-func Info() string {
-	return fmt.Sprintf("test-library %s - A simple Go library for testing", Version)
+// Info returns information about the current system.
+func Info() map[string]string {
+	return map[string]string{
+		"library_version": Version,
+		"go_version":      runtime.Version(),
+		"os":              runtime.GOOS,
+		"architecture":    runtime.GOARCH,
+		"current_time":    time.Now().Format(time.RFC3339),
+	}
 }
