@@ -1,11 +1,23 @@
 # GoReleaser configuration for Go library
 version: 2
 
+# This is a library project, so we disable all builds
+# https://goreleaser.com/customization/build/
+builds:
+  - binary: fake-binary-name
+    goos: [linux]
+    goarch: [amd64]
+    skip: true
+    main: ./examples
+
 before:
   hooks:
     - go mod tidy
 
-# No builds section for libraries - they are distributed via go get
+# We don't want any archives for libraries
+archives:
+  - format: binary
+    files: [none]
 
 changelog:
   sort: asc
