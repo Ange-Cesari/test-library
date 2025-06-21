@@ -1,0 +1,38 @@
+# GoReleaser configuration for Go library
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+# Explicitly disable builds for library projects
+builds:
+  - binary: fake-binary-name
+    goos: [linux]
+    goarch: [amd64]
+    skip: true
+    main: ./examples
+
+# Disable archives since we don't have any builds
+archives:
+  - format: binary
+    files: [none]
+
+changelog:
+  sort: asc
+  use: git
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+      - '^chore:'
+  groups:
+    - title: 'Features'
+      regexp: '^.*?feat.*?:'
+      order: 0
+    - title: 'Bug fixes'
+      regexp: '^.*?fix.*?:'
+      order: 1
+    - title: 'Others'
+      order: 999

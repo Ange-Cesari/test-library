@@ -1,0 +1,8 @@
+project_name: ""
+project_type: ""
+language: golang
+platforms: []
+architectures: []
+release_assets: []
+ci_provider: github
+extra_config: {}
