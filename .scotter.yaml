@@ -1,13 +1,13 @@
-project_name: ""
-project_type: ""
+project_name: test-library
+project_type: library
 language: go
 platforms:
     - linux
     - darwin
     - windows
-architectures:
-    - amd64
-    - arm64
+architectures: []
 release_assets:
     - checksum
+    - source
+    - sbom
 ci_provider: github
